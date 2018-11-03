@@ -1,0 +1,74 @@
+
+
+---------------------------- FORCE FIELD ----------------------------------
+// Turns the forcefield on and off.
+scriptEvent	void 	Toggle();
+
+--When you use the GUI editor and save the gui, it can break programs by changing onNamedEvent to onEvent!!!
+
+--------------------------- New Ammo Counter ------------------------------
+set "AmmoFlash2::visible" "0" ;  //no
+set "AmmoFlash1::visible" "0" ; //no
+set	"ScanLineLA::visible" "0" ; //no
+set	"ScanLineLAG::visible" "0"; //no
+set	"BorderLAGrenades::visible" "1" ; //keep
+set	"BorderLA::visible" "0" ;  //no
+set	"BorderLA_1::visible" "0"; //no 
+set	"BorderLA_2::visible" "0"; //no 
+set	"weaphud" "0"; //no 
+set	"BgLA::visible" "0"; //no
+set	"Lines1A::visible" "0" ; //no
+set	"Lines1B::visible" "1" ; //keep
+set	"Lines2A::visible" "0" ; //no
+set	"ammovalue2Black::visible" "0" ; //no
+set	"ammovalue2::visible" "0" ; //no
+set	"ammovalue3Black::visible" "0" ; //no
+set	"ammovalue3::visible" "1" ; //keep
+
+-------------------------------- RUNNING ---------------------------------
+// Sets the movement speed. Set this speed before initiating a new move.
+scriptEvent	void 	speed( float speed );
+pm_walkspeed	speed the player can move while walking
+type: float
+pm_runspeed	speed the player can move while running
+type: float
+pm_staminarate          rate that player regains stamina. divide pm_stamina by this value to determine how long it 
+                        takes to fully recharge. || type: float
+pm_staminathreshold     when stamina drops below this value, player gradually slows to a walk || type: float
+pm_stamina	length of time player can run || type: float
+
+-------------------------------- CAMERA ----------------------------------
+pm_thirdPerson	enables third person view
+type: bool
+default: 0 (false)
+pm_thirdPersonAngle	direction of camera from player in 3rd person in degrees (0 = behind player, 180 = in front)
+type: float
+pm_thirdPersonClip	clip third person view into world space
+type: bool
+default: 1 (true)
+pm_thirdPersonDeath	enables third person view when player dies
+type: bool
+default: 0 (false)
+pm_thirdPersonHeight	height of camera from normal view height in 3rd person
+type: float
+pm_thirdPersonRange	camera distance from player in 3rd person
+type: float
+
+----- Teleport Script ------
+void monster_base::Torso_Death() {
+	//finishAction( "dead" ); /*** Removed for corpse mode. -Raleigh ***/
+    
+    /*** Self-rezzing after 30 seconds, for a higher challenge mode. -Raleigh ***/
+    wait(60); 
+    hide();
+	resurrect = true;
+	AI_DEAD = true;
+    setState( "state_Resurrect" );
+}
+
+----- Damage/Protection Balances -----
+g_damageScale           scale final damage on player by this factor
+g_armorProtection       armor takes this percentage of damage
+pm_air                  how many seconds to go without taking damage from lack of air
+g_useDynamicProtection  scale damage & armor dynamically to keep player alive more often (not fair).
+
