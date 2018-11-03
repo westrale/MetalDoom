@@ -1,0 +1,216 @@
+/***********************************************************************
+
+	weapon_fists.def
+
+***********************************************************************/
+
+export fred {
+	// view model fists
+	options -prefix FIST_
+	mesh	models/weapons/berserk/cycles/idle.mb -dest models/md5/weapons/fists_view/fists
+	anim	models/weapons/berserk/cycles/idle.mb -rotate 180 -dest models/md5/weapons/fists_view/idle
+	anim	models/weapons/berserk/cycles/berserk_idle.mb -rotate 180 -dest models/md5/weapons/fists_view/berserk_idle
+	anim	models/weapons/berserk/cycles/berserk_punch1.mb -rotate 180 -dest models/md5/weapons/fists_view/berserk_punch1
+	anim	models/weapons/berserk/cycles/berserk_punch2.mb -rotate 180 -dest models/md5/weapons/fists_view/berserk_punch2
+	anim	models/weapons/berserk/cycles/berserk_punch3.mb -rotate 180 -dest models/md5/weapons/fists_view/berserk_punch3
+	anim	models/weapons/berserk/cycles/berserk_punch4.mb -rotate 180 -dest models/md5/weapons/fists_view/berserk_punch4
+
+
+	anim	models/weapons/berserk/cycles/punch1.mb -range 30 53 -rotate 180 -dest models/md5/weapons/fists_view/punch1
+	anim	models/weapons/berserk/cycles/punch2.mb -range 30 53 -rotate 180 -dest models/md5/weapons/fists_view/punch2
+	anim	models/weapons/berserk/cycles/punch2.mb -range 133 160 -rotate 180 -dest models/md5/weapons/fists_view/punch3
+	anim	models/weapons/berserk/cycles/punch2.mb -range 186 193 -rotate 180 -dest models/md5/weapons/fists_view/punch4
+	anim	models/weapons/berserk/cycles/punch2.mb -range 193 213 -rotate 180 -dest models/md5/weapons/fists_view/punch5
+	anim	models/weapons/berserk/cycles/punch2.mb -range 20 30 -rotate 180 -dest models/md5/weapons/fists_view/raise
+	anim	models/weapons/berserk/cycles/punch2.mb -range 213 218 -rotate 180 -dest models/md5/weapons/fists_view/lower
+}
+
+entityDef weapon_fists {
+	"model_view" 				"viewmodel_fists"
+
+	"inv_name"					"Fists"
+	"inv_weapon"				"weapon_fists"
+	"icon"						"guis/assets/hud/wpn_12"
+
+	"weapon_scriptobject"		"weapon_fists"
+	"def_melee"					"damage_fists"
+	"def_projectile"            "projectile_fists" //Raleigh //NEW
+    "melee_distance"			"96"	//Raleigh	//"48"
+	"ammoType"					""
+	"ammoRequired"				"0"
+	"clipSize"					"0"
+	"mtr_flashShader"			""
+	"flashColor"				""
+	"flashRadius"				"0"
+	"silent_fire"				"1"
+
+	"hide_time"					"0.3"								// time to hide weapon when talking to npcs or looking at guis
+	"hide_distance"				"-15"								// distance to offset weapon when talking to npcs or looking at guis
+
+	"impact_damage_effect"		"1"
+
+	"snd_acquire"				"guisounds_weapon"
+	"skin_invisible"			"skins/fists_invis"
+	
+	"stealing"					"1"					// this weapon steals other player weapon
+}
+
+model viewmodel_fists {
+	mesh			models/md5/weapons/fists_view/fists.md5mesh
+	offset			( -10 0 -6.5 )
+
+	anim raise			models/md5/weapons/fists_view/raise.md5anim {
+		frame	1		sound_weapon fist_raise
+	}
+	anim idle 			models/md5/weapons/fists_view/idle.md5anim
+	anim berserk_idle 	models/md5/weapons/fists_view/berserk_idle.md5anim
+	anim aim 			models/md5/weapons/fists_view/idle.md5anim
+	anim punch_left1	models/md5/weapons/fists_view/berserk_punch1.md5anim
+	anim punch_left2	models/md5/weapons/fists_view/berserk_punch3.md5anim
+	anim punch_right1	models/md5/weapons/fists_view/berserk_punch2.md5anim
+	anim punch_right2	models/md5/weapons/fists_view/berserk_punch4.md5anim
+	anim putaway 		models/md5/weapons/fists_view/lower.md5anim
+}
+
+entityDef damage_fists {
+	"damage"			"40" //Raleigh //"20"
+	"kickDir"			"-1 0 0"
+
+	"mtr_blob"			"genericDamage"
+	"blob_time"			"300"
+	"blob_size"			"400"
+	"blob_offset_x"		"400"
+
+	"knockback"			"40" //Raleigh //"20"
+	"push"				"20000"
+
+	"gib"				"1"
+	"smoke_wound_flesh"	"burstysquirt.prt"
+	"mtr_wound_flesh"	"textures/decals/hurt02"
+
+	"kick_time"			"400"
+	"kick_amplitude"	"1"
+
+	"dv_time"			"100"
+
+	"snd_metal"			"fist_impact"
+	"snd_ricochet"		"fist_impact"
+	"snd_flesh"			"fist_impact_flesh"
+	"snd_stone"			"fist_impact"
+	"snd_wood"			"fist_impact"
+	"snd_cardboard"		"fist_impact"
+	"snd_glass"			"fist_impact"
+	"snd_liquid"		"fist_impact"
+	"snd_plastic"		"fist_impact"
+	"snd_shatter"		"melee_impact_glass"	
+	
+	"snd_hit"			"fist_impact"
+	"snd_miss"			"fist_whoosh"		
+	"snd_hit_berserk"	"fist_gorepunch"
+}
+
+
+
+entityDef damage_fistsRanged {
+	"damage"			"20" 
+	"kickDir"			"-1 0 0"
+
+	"mtr_blob"			"genericDamage"
+	"blob_time"			"300"
+	"blob_size"			"400"
+	"blob_offset_x"		"400"
+
+	"knockback"			"60" //Raleigh //"20"
+	"push"				"20000"
+
+	"gib"				"1"
+	"smoke_wound_flesh"	"burstysquirt.prt"
+	"mtr_wound_flesh"	"textures/decals/hurt02"
+
+	"kick_time"			"400"
+	"kick_amplitude"	"1"
+
+	"dv_time"			"100"
+
+	"snd_metal"			"teleport_lightning"
+	"snd_ricochet"		"teleport_lightning"
+	"snd_flesh"			"teleport_lightning"
+	"snd_stone"			"teleport_lightning"
+	"snd_wood"			"teleport_lightning"
+	"snd_cardboard"		"teleport_lightning"
+	"snd_glass"			"teleport_lightning"
+	"snd_liquid"		"teleport_lightning"
+	"snd_plastic"		"teleport_lightning"
+	"snd_shatter"		"melee_impact_glass"	
+	
+	"snd_hit"			"teleport_lightning"
+	"snd_miss"			"teleport_lightning"		
+	"snd_hit_berserk"	"teleport_lightning"
+}
+
+entityDef projectile_fists {
+	"spawnclass"					"idProjectile"
+	"mins"							"-3 -3 -6"
+	"maxs"							"3 3 6"
+	"cone"							"5"
+	"model" 						"sab_lightning1.prt" 
+						
+	"def_damage"					"damage_fistsRanged"
+	"def_splash_damage"			""
+									
+	"launchFromBarrel"			"1"
+	"health"						"200"					// amount of damage projectile can take if damaged (0 means it can't be destroyed)
+	"velocity"						"50 0 -1000"			// how fast the projectile leaves the gun (or distance if fuse is 0)
+	"angular_velocity"			"0 0 0"				// how the projectile is rotating when it leaves the gun
+	"thrust"						"0"					// the rate of acceleration (always in the direction of the projectiles model)
+	"thrust_start"					"0"					// when to start accelerating
+	"thrust_end"					"25"					// when to stop accelerating
+	"linear_friction"				"125"					// "air" friction
+	"angular_friction"			"1000"
+	"contact_friction"			"10000"
+	"bounce"						"0"					// how much speed a projectile retains when it bounces off of objects (coefficient of restitution).  0 means no bounce.
+	"mass"							"10"
+	"gravity"						"2000"				// how much gravity affects the trajectory.  gravity direction is same as the entity that fired it.
+	"fuse"							"99999"				// how long before the projectile is removed or self-detonates.  Use 0 for beam weapons (velocity == distance).
+
+	"detonate_on_fuse"			"1"					// whether projectile should detonate when it's fuse runs out
+	"detonate_on_death"			"1"					// whether projectile should detonate when it's "killed" (health runs out)
+	"detonate_on_world"			"1"					// whether projectile should detonate when it hits an obstacle
+	"detonate_on_actor"			"1"					// whether projectile should detonate when it hits a character in the game
+
+	"impact_damage_effect"		"0"					// whether projectile causes blood splats from characters that bleed
+	"impact_gib"					"0"					// whether projectile can gib a character or not (for example: bullets don't gib, but rockets do)
+
+	"mtr_detonate"					""
+	"decal_size"					"75" 
+
+	"smoke_fly"	                "sab_lightning1.prt"    // particle effect while in the air
+	"smoke_detonate"				""			// particle effect when detonates
+	"smoke_residue"				"sab_lightning1.prt" 	// particle effect while in the air
+	"smoke_bounce"					"sab_lightning1.prt" // particle effect when bounces
+	"smoke_fuse"					"sab_lightning1.prt" // particle effect when removed from fuse expiring
+	
+	// parametric particles -- temp
+	"model_detonate"				""
+										
+	"debris_count"					"0"
+	"def_debris"					""
+	"def_shrapnel"					""
+	
+	"mtr_light_shader"			"lights/redglow" 
+	"light_color"					"1 0.25 0.25"
+	"light_radius"					"2000"
+	"light_offset"					"3 3 3"
+    
+    "kick_time"			"300"
+	"kick_amplitude"	"3"
+
+	"mtr_explode_light_shader"	"lights/redglow" 
+	"explode_light_color"			"1 0.25 0.25"
+	"explode_light_radius"		"2000"
+	"explode_light_fadetime"		"100.0"
+
+	"snd_explode"					"thunderclap"
+	"snd_fly"						""
+	
+}

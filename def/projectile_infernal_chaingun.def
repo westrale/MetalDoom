@@ -1,0 +1,64 @@
+
+
+entityDef projectile_infernal_chaingun {
+	"spawnclass"				"idProjectile"
+	"mins"						"-2 -2 -2"
+	"maxs"						"2 2 2"
+	"cone"						"3"
+	"model" 					"hellknight_fireball2.prt"
+
+	"def_damage"				"damage_infernal_chaingun"
+	"def_splash_damage"			"damage_infernal_chaingun_splash"
+								
+	"launchFromBarrel"			"1"
+	"health"					"5"					// amount of damage projectile can take if damaged (0 means it can't be destroyed)
+	"velocity"					"475 0 -150"			// how fast the projectile leaves the gun (or distance if fuse is 0)
+	"angular_velocity"			"0 0 0"				// how the projectile is rotating when it leaves the gun
+	"thrust"					"0"					// the rate of acceleration (always in the direction of the projectiles model)
+	"thrust_start"				"0"					// when to start accelerating
+	"thrust_end"				"0"					// when to stop accelerating
+	"linear_friction"			"0"					// "air" friction
+	"angular_friction"			"0"
+	"contact_friction"			"0"
+	"bounce"					"0"					// how much speed a projectile retains when it bounces off of objects (coefficient of restitution).  0 means no bounce.
+	"mass"						"5"
+	"gravity"					"5"				// how much gravity affects the trajectory.  gravity direction is same as the entity that fired it.
+	"fuse"						"20"				// how long before the projectile is removed or self-detonates.  Use 0 for beam weapons (velocity == distance).
+								
+	"detonate_on_fuse"			"0"					// whether projectile should detonate when it's fuse runs out
+	"detonate_on_death"			"1"					// whether projectile should detonate when it's "killed" (health runs out)
+	"detonate_on_world"			"1"					// whether projectile should detonate when it hits an obstacle
+	"detonate_on_actor"			"1"					// whether projectile should detonate when it hits a character in the game
+								
+	"impact_damage_effect"		"0"					// whether projectile causes blood splats from characters that bleed
+	"impact_gib"				"1"					// whether projectile can gib a character or not (for example: bullets don't gib, but rockets do)
+								
+	"mtr_detonate"				"textures/decals/ballburn_plasma"
+	"decal_size"				"75" 
+
+	"smoke_fly"						""	//"hellknight_trail.prt"									// particle effect while in the air
+	"smoke_detonate"			""					// particle effect when detonates
+	"smoke_residue"				""					// particle effect while in the air
+	"smoke_bounce"				""					// particle effect when bounces
+	"smoke_fuse"				""					// particle effect when removed from fuse expiring
+	
+	// parametric particles -- temp
+	"model_detonate"			"bigexplosion.prt"
+									
+	"debris_count"				"3"
+	"def_debris"				"debris_largeshrapnel"
+	"def_shrapnel"				"debris_shrapnel"
+	
+	"mtr_light_shader"			"lights/impflyflash"
+	"light_color"				"0.1 0.6 0.9"
+	"light_radius"				"40"
+	"light_offset"				"0 0 0"
+
+	"mtr_explode_light_shader"	"lights/spawnflash"
+	"explode_light_color"		"0.1 0.6 0.9"
+	"explode_light_radius"		"120"
+	"explode_light_fadetime"	"1"
+
+	"snd_explode"				"monster_demon_imp_fireball_explode"
+	"snd_fly"					"monster_demon_imp_fireball_flight"					// particle effect while in the air
+}

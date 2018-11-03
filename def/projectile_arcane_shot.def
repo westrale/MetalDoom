@@ -1,0 +1,63 @@
+
+
+entityDef projectile_arcane_shot {
+	"spawnclass"					"idProjectile"
+	"mins"							"-1 -1 -1"
+	"maxs"							"1 1 1"
+	"model" 						"guardian_fireball_b.prt"
+	
+	"noFloorCollision"			"1"
+
+	"def_damage"					"damage_bullet_machinegun"
+	"def_splash_damage"			""
+	"health"						"10"
+	"velocity"						"1000 0 0"
+	"angular_velocity"			"0 0 0"
+	"thrust"						"0"
+	"thrust_start"					"0"
+	"thrust_end"					"0"
+	"linear_friction"				"0"
+	"angular_friction"			"0"
+	"contact_friction"			"0"
+	"bounce"						"0.9"
+	"mass"							"3"
+	"gravity"						"0"
+	"fuse"							"4"
+
+	"detonate_on_fuse"			"0"
+	"detonate_on_death"			"1"
+	"detonate_on_world"			"1"
+	"detonate_on_actor"			"1"
+
+	"impact_damage_effect"		"1"
+	"impact_gib"					"0"			
+
+	"mtr_detonate"					"textures/decals/ballburn01"
+	"decal_size"					"25" 
+
+	"smoke_fly"					"sparks.prt"
+	"smoke_detonate"				""
+	"smoke_residue"				""
+	"smoke_bounce"					""
+	"smoke_fuse"					""
+	
+	"model_detonate"				"manc_explosion.prt"
+										
+	"debris_count"					"1"
+	"def_debris"					"debris_largeshrapnel"
+	"def_shrapnel"					"debris_shrapnel"
+	
+	// temp removed while seneca works on it
+	//"mtr_light_shader"			"lights/impflyflash"
+	//"light_color"				"0.9 0.7 0.05"
+	//"light_radius"				"160"
+	//"light_offset"				"0 0 0"
+
+	"mtr_explode_light_shader"	"lights/impflash"
+	"explode_light_color"			"3.6 3.0 0.5"
+	"explode_light_radius"		"180"
+	"explode_light_fadetime"		"1.0"
+
+	"snd_explode"					"monster_demon_imp_fireball_explode"
+	"snd_fly"						"monster_guardian_fireball_flight"
+}

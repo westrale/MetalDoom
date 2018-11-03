@@ -1,0 +1,266 @@
+/***********************************************************************
+
+	weapon_chainsaw.def
+
+***********************************************************************/
+
+export fred {
+	// view model chainsaw
+	options -prefix CHAINSAW_ -keep barrel -parent boo chainsaw -parent barrel chainsaw -rename origin blah
+	mesh	models/weapons/chainsaw/cycles/idle.mb -dest models/md5/weapons/chainsaw_view/viewchainsaw
+	anim	models/weapons/chainsaw/cycles/idle2.mb -dest models/md5/weapons/chainsaw_view/idle2
+	anim	models/weapons/chainsaw/cycles/lower.mb -dest models/md5/weapons/chainsaw_view/lower
+
+	anim	models/weapons/chainsaw/cycles/melee4.mb -dest models/md5/weapons/chainsaw_view/melee
+	anim	models/weapons/chainsaw/cycles/melee4.mb -range 1 10 -dest models/md5/weapons/chainsaw_view/melee_start
+	anim	models/weapons/chainsaw/cycles/melee4.mb -range 11 16 -dest models/md5/weapons/chainsaw_view/melee_loop
+	anim	models/weapons/chainsaw/cycles/melee4.mb -range 17 38 -dest models/md5/weapons/chainsaw_view/melee_end
+	anim	models/weapons/chainsaw/cycles/wallkick.mb -range 17 40 -dest models/md5/weapons/chainsaw_view/wallkick
+
+	anim	models/weapons/chainsaw/cycles/newraise.mb -dest models/md5/weapons/chainsaw_view/newraise
+
+	// world model chainsaw
+	options -prefix PLAYER_CHAINSAW_ -keep ATTACHER -rename ATTACHER origin -clearorigin
+	addoptions -skipmesh PLAYER_chainsawcordmesh
+	addoptions -skipmesh PLAYER_chainsawblademesh
+	addoptions -skipmesh PLAYER_chainsawhandlemesh
+	addoptions -skipmesh PLAYER_chainsawbodymesh
+	addoptions -skipmesh PLAYER_chainsawstartermesh
+
+	mesh	models/characters/player/mocap/chainsaw_idle.mb -dest models/md5/weapons/chainsaw_world/worldchainsaw
+	anim	models/characters/player/mocap/chainsaw_idle.mb -dest models/md5/weapons/chainsaw_world/chainsaw_idle
+	anim	models/characters/player/mocap/chainsaw_raise.mb -range 43 114 -dest models/md5/weapons/chainsaw_world/chainsaw_raise1
+	anim	models/characters/player/mocap/chainsaw_raise.mb -range 43 144 -dest models/md5/weapons/chainsaw_world/chainsaw_raise2
+	anim	models/characters/player/mocap/chainsaw_raise.mb -range 43 180 -dest models/md5/weapons/chainsaw_world/chainsaw_raise3
+}
+
+entityDef weapon_chainsaw {
+	"editor_color"				".3 .3 1"
+	"editor_mins"				"-16 -16 0"
+	"editor_maxs"				"16 16 32"
+	"editor_usage"				"Chainsaw"
+	"editor_rotatable"			"1"
+
+	"spawnclass"				"idItem"
+	"size"						"32 32 32"
+	"model"						"models/weapons/chainsaw/w_chainsaw.lwo"
+	"model_view" 				"viewmodel_chainsaw"
+	"model_world" 				"worldmodel_chainsaw"
+	"joint_attach"				"CHAINSAW_ATTACHER"
+	"def_dropItem"				"moveable_item_chainsaw"
+
+	"inv_name"					"Chainsaw"
+	"inv_weapon"				"weapon_chainsaw"
+	"inv_item"					"5"
+	"inv_icon"					"guis/assets/hud/wpn_9"
+
+	"weapon_scriptobject"		"weapon_chainsaw"
+	"def_melee"				"damage_chainsaw"
+	"melee_distance"			"100"
+	"def_projectile"			"projectile_chainsaw"	//Raleigh	
+	"ammoType"					""
+	"ammoRequired"				"0"
+	"clipSize"					"0"
+	"mtr_flashShader"			"muzzleflash"
+	"flashColor"				"1 0.8 0.4"
+	"flashRadius"				"120"	
+	"silent_fire"				"0"
+	"recoilTime"				"0"
+	"recoilAngles"				"0 0 0"
+
+	"hide_time"					"0.3"								// time to hide weapon when talking to npcs or looking at guis
+	"hide_distance"				"-20"								// distance to offset weapon when talking to npcs or looking at guis
+
+	"weaponAngleOffsetAverages" "15"
+	"weaponAngleOffsetScale" 	".5"
+	"weaponAngleOffsetMax"		"50"
+	"weaponOffsetTime"			"500"
+	"weaponOffsetScale"			"0.005"
+
+	"impact_damage_effect"		"1"
+
+	"snd_acquire"				"sound_weapon_acquire"
+	"snd_respawn"				"sound_weapon_respawn"
+	"snd_hum"					"player_chainsaw_idle"
+	
+	"smoke_muzzle"				"chainsaw_smoke.prt"
+	"continuousSmoke"			"1"
+	
+	"smoke_strike"				"chainsawstrike.prt"
+	"mtr_strike"				"textures/decals/chainsawh02"
+	
+	"snd_startattack"			"player_chainsaw_startAttack"
+	"snd_attack"				"player_chainsaw_attack"
+	"snd_stopattack"			"player_chainsaw_stopAttack"
+	"snd_cspull"				"monster_zombie_chainsaw_pull"
+	"snd_csrelease"				"monster_zombie_chainsaw_release"
+	"snd_csattack"				"monster_zombie_chainsaw_attack1"
+	"snd_csidle"				"monster_zombie_chainsaw_idle"
+	"snd_putaway"				"player_chainsaw_putaway"
+	
+	"skin_invisible"			"skins/chainsaw_invis"
+}
+
+entityDef moveable_item_chainsaw {
+	"inherit"					"weapon_chainsaw"
+	"spawnclass"				"idMoveableItem"
+	"density"					"0.05"
+	"friction"					"0.2"
+	"bouncyness"				"0"
+}
+
+model worldmodel_chainsaw {
+	mesh						models/md5/weapons/chainsaw_world/worldchainsaw.md5mesh
+	
+	anim idle 					models/md5/weapons/chainsaw_world/chainsaw_idle.md5anim
+	anim raise					models/md5/weapons/chainsaw_world/chainsaw_idle.md5anim
+}
+
+model viewmodel_chainsaw {
+	mesh 						models/md5/weapons/chainsaw_view/viewchainsaw.md5mesh
+	offset						( -4 3 2 )//( 5 1 1 )
+
+	anim idle 					models/md5/weapons/chainsaw_view/idle2.md5anim 
+
+	anim melee_start 			models/md5/weapons/chainsaw_view/melee_start.md5anim
+	
+	anim melee_loop 			models/md5/weapons/chainsaw_view/melee_loop.md5anim
+	
+	anim melee_end 				models/md5/weapons/chainsaw_view/melee_end.md5anim 
+	
+	anim wallkick				models/md5/weapons/chainsaw_view/wallkick.md5anim
+
+	
+
+	anim putaway				models/md5/weapons/chainsaw_view/lower.md5anim {
+		frame 1						sound_weapon player_chainsaw_putaway
+	}
+	anim raise1					models/md5/weapons/chainsaw_view/newraise.md5anim {
+		frame 3						sound_voice2 player_chainsaw_pull_zip
+		frame 13					sound_weapon player_chainsaw_pull 
+		frame 22					sound_body2 player_chainsaw_release
+	}
+
+}
+
+entityDef damage_chainsaw {
+	"damage"			"50"
+	"kickDir"			"1 0 0"
+
+	"mtr_blob"			"genericDamage"
+	"blob_time"			"300"
+	"blob_size"			"400"
+	"blob_offset_x"		"400"
+
+	"knockback"			"300"
+	"push"				"2000"
+
+	"gib"				"1"
+	"smoke_wound_flesh"	"chainsawwound.prt"
+	"mtr_wound_flesh"	"textures/decals/hurt02"
+	"mtr_splat_flesh"	"textures/decals/dsplat2"
+	"mtr_splat_flesh2"	"textures/decals/dsplat5"
+	"mtr_wound_metal"	"textures/decals/chainsawh02"
+	"mtr_wound_glass"	"textures/decals/chainsawh02"
+
+	"kick_time"			"1000"
+	"kick_amplitude"	"5"
+
+	"dv_time"			"100"
+	
+	"snd_hit"			"player_chainsaw_hit_flesh"		// TEMP
+	"snd_metal"			"player_chainsaw_hit_metal"
+	"snd_flesh"			"player_chainsaw_hit_flesh"
+	"snd_stone"			"player_chainsaw_hit_metal"
+	"snd_wood"			"player_chainsaw_hit_metal"
+	"snd_cardboard"		"player_chainsaw_hit_metal"
+	"snd_glass"			"player_chainsaw_hit_metal"
+	"snd_liquid"		"player_chainsaw_hit_metal"
+	"snd_plastic"		"player_chainsaw_hit_metal"
+}
+
+
+entityDef projectile_chainsaw {
+	"spawnclass"				"idProjectile"
+	"mins"						"-1 -1 -2"
+	"maxs"						"1 1 2"
+	"cone"						"20"
+	"model" 					"firejet.prt"
+
+	"def_damage"				"damage_chainsawDirect"
+	"def_splash_damage"		"damage_chainsawSplash"
+
+	"launchFromBarrel"		"1"					// launch from barrel
+	"health"					"20"					// amount of damage projectile can take if damaged (0 means it can't be destroyed)
+	"velocity"					"100 0 0"			// how fast the projectile leaves the gun (or distance if fuse is 0)
+	"angular_velocity"		"0 0 0"				// how the projectile is rotating when it leaves the gun
+	"thrust"					"0"					// the rate of acceleration (always in the direction of the projectiles model)
+	"thrust_start"				"0"					// when to start accelerating
+	"thrust_end"				"0"					// when to stop accelerating
+	"linear_friction"			"0"					// "air" friction
+	"angular_friction"		"0"
+	"contact_friction"		"0"
+	"bounce"					"0"					// how much speed a projectile retains when it bounces off of objects (coefficient of restitution).  0 means no bounce.
+	"mass"						"10"
+	"gravity"					"0"					// how much gravity affects the trajectory.  gravity direction is same as the entity that fired it.
+	"fuse"						"0"				// how long before the projectile is removed or self-detonates.  Use 0 for beam weapons (velocity == distance).
+
+	"detonate_on_fuse"		"0"					// whether projectile should detonate when it's fuse runs out
+	"detonate_on_death"		"1"					// whether projectile should detonate when it's "killed" (health runs out)
+	"detonate_on_world"		"1"					// whether projectile should detonate when it hits an obstacle
+	"detonate_on_actor"		"1"					// whether projectile should detonate when it hits a character in the game
+
+	"impact_damage_effect"	"1"					// whether projectile causes blood splats from characters that bleed
+	"impact_gib"				"1"					// whether projectile can gib a character or not (for example: bullets don't gib, but rockets do)
+								
+	"mtr_detonate"				"textures/decals/ballburn01"
+	"decal_size"				"30"
+
+	"smoke_fly"				"smallblacksmoke.prt"		// particle effect while in the air
+	// parametric particles -- temp
+	"model_detonate"			""
+	"smoke_detonate"			""						// particle effect when detonates
+	"smoke_residue"			"particle/lostsoulsmoke"						// particle effect while in the air
+	"smoke_bounce"				""
+	"smoke_fuse"				""
+
+	"debris_count"				"0"
+	"def_debris"				""
+	"def_shrapnel"				""
+	
+	"mtr_light_shader"			""
+	"light_color"				"1 0.8 0.4"
+	"light_radius"				"160"
+	"light_offset"				"0 0 0"
+
+	"mtr_explode_light_shader"	"lanternglow"
+	"explode_light_color"		"2 1.6 0.8"
+	"explode_light_radius"		"320"
+	"explode_light_fadetime"	"0.5"
+
+	"snd_fly"					"monster_demon_imp_fireball_throw"					// sound effect while in the air
+	"snd_explode"				"monster_demon_imp_fireball_explode"
+}
+
+entityDef damage_chainsawdirect {
+	"damage"						"9"
+	"kickDir"						"1 0 0"
+
+	"mtr_blob"						"genericDamage"
+	"blob_time"					"300"
+	"blob_size"					"400"
+	"blob_offset_x"				"400"
+
+	"knockback"					"10"
+
+	"kick_time"					"3"
+	"kick_amplitude"				"0.5"
+
+	"dv_time"						"100"
+	"smoke_wound_flesh"			"bloodwound.smoke"
+}
+
+entityDef damage_chainsawsplash {
+	"damage"						"6"
+	"radius"						"10"
+}
