@@ -1,0 +1,6 @@
+// To create a shortcut that immediately opens this mod,
+//   place the following in your .exe (shortcut) file:
+// Target: "..\Doom 3\Doom3.exe" +set fs_game "MetalDoom" , replacing .. with your full path to the "Doom 3" folder.
+// Folder: "..\Doom 3\", replacing .. with your full path to the "Doom 3" folder.
+
+// Use Metal_ico.ico as the shortcut icon
